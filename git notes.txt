@@ -1,0 +1,219 @@
+git theory 
+
+1. Repository : 
+- Repository is a place where you have all your codes or kind of folder on server.
+- changes are personal to that particular repository.
+
+2. Server:
+- it stores all repositories.
+- it contains metadata also. [commit id , tag]
+
+3. working directory:
+- where you see files physically and do modification.
+- at a time , you can work on particular branches.
+
+4. Commit: 
+- Store changes in repository you will get one commit id.
+- it is 4- alphanumerical character.
+- it user SHA-1 checksum concept.
+- even if you change one dot the commit id will get changes.
+- it actually helps you to trach the changes 
+- commit is also named as SHA-1 hash.
+
+5. Commit Id /Version-Id/Version:
+- reference to identify each change
+- to identify who changes the file.
+
+6. Tags:
+- Tags assign a meaning ful name with specific version in the repository once a tag is created for a particular save even if you create a new commit it will not be updated.
+
+7. Snapsorts:
+- Represents some data of particular time 
+- it is always incremental ie it stores the changes {appended} only not entire copy.
+ 
+8. Push :
+- push operation copies changes from a local repo to a remote or central repository [git-hub] 
+- this is used to store the changes permanently into the git repository.
+
+7. Pull : 
+- Pull operation copies the changes from a remote repository toa local machine. 
+- The pull operatuon is used for synchronication between two repos.
+
+8. Branch :
+- Default branch is "master"
+- Product is same , so one repository byt different task
+- Each task has one seperate branch
+- finally merger [code] all branches.
+- useful when you want to work parallely
+- can create one branch on the basisi of another branch
+- changes are perosnal to that particular branch
+- file created in workspace willbe visible in amy of the branch workspace untill you commit. once you commit then that file belongs to that particular branch.
+
+==============================================================================================================
+
+OREGON REGION INSTANCE :
+
+sudo -i 
+yum install -y 
+yum install git -y
+git --version
+git config --global user.name "mohit'
+git config --global user.email "mohit972@gmail.com"
+git config --list
+
+MUMBAI REGION INSTANCE :
+
+sudo -i 
+yum install -y 
+yum install git -y
+git --version
+git config --global user.name "rahul"
+git config --global user.email "rahul@gmail.com"
+git config --list
+
+OREGON REGION INSTANCE :
+
+mkdir oregongit
+cd oregongit
+git init
+cat > testing1 
+this is testing code
+
+git status
+	
+	On branch master
+
+	No commits yet
+
+	Untracked files:
+  	(use "git add <file>..." to include in what will be committed)
+        testing1
+
+git add .
+
+git status 
+
+	On branch master
+
+	No commits yet
+
+	Changes to be committed:
+ 	 (use "git rm --cached <file>..." to unstage)
+        new file:   testing1
+
+git commit -m "this my first commit from oregon"
+
+git log
+ 
+	commit ad574fb774f37199ba0b703089ad67ba0ff2405e (HEAD -> master)
+	Author: root <root@ip-172-31-14-240.us-west-2.compute.internal>
+	Date:   Fri Oct 7 07:52:43 2022 +0000
+
+    	my first commit from oregon
+
+git show <paste 5 digit of commit id> [THIS WILL SHOW THE FILE NAME INCLUDING CODE WRITTEN IN THAT FILE]
+
+
+GIT-HUB :
+
+Create a new repository 
+	owner: mohit 	repository name: centralgit
+	description : code for testing
+	public
+
+copy the url  
+
+git remote add origin <paste the url of github repository>
+git push -u origin master
+	username : mohit-decoder
+	password : generate token in git-hub [account > developer > token > create token] 
+	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
+
+cat >testing1 
+second testing file
+
+git status
+
+git add
+
+git commit -m "second commit from oregon"
+
+git log 
+
+git push -u push origin master
+
+[go to github the testing1 file will be shown in the central repository]
+
+SINGAPORE REGION :
+
+mkdir singaporegit 
+cd singaporegit 
+git init 
+git remote add origin <centralrepo url paste>
+
+git pull origin master
+
+git log
+
+cat >>oregon1 this code is written by rahul
+
+cat >oregon1 
+
+git status [modified is in red color because it is not added.]
+
+git add .
+
+git status [modified is in green color and successfull added]
+
+git commit -m "this is commited from singapore"
+
+git status [working tree will be empty]
+
+git log [it will show all the commited log ]
+
+git push origin master 
+username : mohit-decoder
+password : [token generated for central-repo]
+
+[check in the git hub ]
+
+
+OREGON REGION : 
+
+cd /orefongit
+git pull origin master 
+git log [it will reflect the commit made by rahul in singapore region]
+
+GIT IGNORE COMMAND :
+
+vim .gitignore
+*.css
+*.java
+
+git add .gitignore
+
+git commit -m "ignore file format"
+
+touch file.txt file2.txt file3.java file4.java file5.css file6.css
+
+git add .
+
+git status [it will reflect the file1 and file 2 only]
+
+git commit -m "ignore java and css files"
+
+git log
+
+git show <commit id>
+
+git log -1 <latest commit / recent commit >
+
+git log -2 <previous commit >
+
+git log --grep "ignore"  [if you dont know the commit id] 
+
+==============================================================================================================
+
+
+
+

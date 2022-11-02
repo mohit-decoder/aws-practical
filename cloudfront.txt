@@ -1,0 +1,23 @@
+step 1: create a bucket
+	name: mm-cloudfront-bucket
+	region: oregon
+	object ownership: acl disabled
+	block all public access [uncheck]
+	bucket versioning: enable
+[go to browser search freecss download a template and unzip the template]
+	upload the template folder in s3 object 
+	object > templatefolder > files [click on actions > move ; bucket > firstpage]
+	Permissions : edit object ownership 
+				- acl enabled
+	Edit access control list: Everyone (public access) list and read 
+	Properties > Enable dynamic hosting
+			  hosting type: host a static website
+			  index document: index.html
+	select all object > actions > make public using acl
+			  
+
+STEP 2: Cloudfront > Create Distribution
+		Origin domain: [select your bucket - mm-cloudfront-bucket ]
+		rest all default settings.
+		
+			

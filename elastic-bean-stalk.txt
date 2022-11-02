@@ -1,0 +1,10 @@
+creation of elastic bean stalk
+
+step1. application name: mm-tomcat	
+	 platform: tomcat	
+	 platform branch: default	
+	 plaform version: recommended
+	 application code: upload your code
+	 source code: version label: tomcat-source
+	 go to browser: https://s3-us-west-2.amazonaws.com/studentapi-cit/student.war
+	 source code origin: local file> choose file student.war

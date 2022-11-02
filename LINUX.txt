@@ -1,0 +1,214 @@
+LINUX : linux is open source kernal based operating system , which is freely available. it is scaleble, flexible, realiable and also required minimum hardware 
+
+operating system: os is that communicate with the hardware and allow other program to run.
+
+operating system is a program that act as an interface btw user and hardware that to execute the program.
+
+shell: it is command line interpretor [translator ]. it gather the input from user and executes program from kernal.
+ 
+kernal: the core component [heart ] of the operating system. 
+it act as bridge btw application and hardware.
+it convert high level language to low level language.
+
+-Monolintic kernal
+-Microlithic kernal
+
+differnet types if shells:
+1. bourne shell [sh] 
+2. bourne again shell [bash] 
+3. korn shell [ksh]
+4. csh
+5. zsh
+
+
+19 directories:
+
+1. /boot
+2. /bin
+3. /dev
+4. /etc
+5. /home
+6. /lib
+7. /lib64
+8. /log
+9. /mnt
+10. /media
+11. /opt
+12. /proc
+13. /root
+14. /sys
+15. /sbin
+16. /temp
+17. /usr
+18. /var
+19. /srv
+
+types of users: 
+
+1. root user [uid = 0]
+2. system user [uid = 1 - 999]
+3. local user [uid = 1000 -65535]
+
+
+/etc/passwd:
+
+users : x : 1002 : 1002 : trainer : /home/user : /bin/bash
+
+1. this field represent the local/root/system user username.
+2. password
+3. uid number
+4. gid number
+5. comment/description
+6. user home directory
+7. login shell
+
+/etc/shadow:
+
+admin : !! : 19109 : 0 : 99999 : 7 : 2 : 10 : 
+
+1. username
+2. excrypted password
+3. last password changed
+4. minimum days password changed
+5. maximum days for password changed
+6. warning days
+7. inactive days
+8. expire
+9. future use
+
+/etc/group
+
+devil : x : 1001 : mohit , abhay
+
+1. group name.
+2. password
+3. gid 
+4. group members
+
+/etc/shadow
+
+devil : !! : devilgrp admin : mohit , abhay
+
+1. group name
+2. excrpyted password
+3. group admin
+4. group members
+
+chage command 
+
+chage -d [last password change]
+chage -m [minimum days]
+chage -M [maximum days]
+chage -W [warning days]
+chage -I [inactivve days]
+chage -E [expire]
+ 
+skelton files : user logging directories 
+/etc/skel -  .bashrc  .bashprofile .bashlogout
+
+user mail generated in /var/spoof/mail/username
+
+change the shelll : chsh [shell name]
+
+d : rwx : r-x : r-x : 2 : mohit : devilgroup : 128 : 1 nov 2022 10:46 : /demo
+
+1. file type
+2. owner file permission
+3.  group permision
+4. other user permission.
+5. link count 
+6. username
+7. groupname
+8. file size
+9. date and time
+10. file/directory name.
+
+types of files:
+
+1. normal file -
+2. directory [d]
+3.  link file [l]
+4. block device file [b]
+5. character file [c]
+6. socket file [s]
+7. pipe file [p]
+
+Hardlink and Softlink:
+
+Hardlink: A hardlink is acts as a copy of the selected files. 
+		files that are hard linked take the same inode number.
+		hardlinks are not allowed for directories. [only superuser can do it.]
+
+Softlink : A softlink also known as symbolic link act as a pointer or a reference to file name.
+		files that are softlink take a different link count.
+		softlink can be used for linking directories.
+
+special permission:
+
+- setuid permission [suid] : this special permission allows all users to access files and directories that are nnormally available to root.
+					chmod u+s /sbin/dmidecode
+					chmod u-s /sbin/dmidecode 
+-setgid permission [sgid] : files that were created in this directory is belong to particular user in that group.
+					chmod g+s 
+					
+-sticky-bit : sitcky bit is used for avoid deletion of files or directory by other user.
+		  chmod o+t /directoryname
+
+access control list : acl use to set permission over files and directory to specific user or specific group we can assign the multiple user with different permission on the same file or different.
+
+	setfacl -m u:username:rwx /filename
+	getfacl /filename [to see the permission.]
+
+Archiving and Compression :
+
+Archiving is the process of combining  multiple files and directories into one file.
+
+Compression is the process of reducing the size of the file or directory.
+
+Archiving is usually used as a part of a system backup and moving one data from one system to another.
+
+tar -cvf etc.tar /etc  [ to create a tar file ]
+tar -tvf etc.tar 		[  to list the tar file ]
+tar -xvf etc.tar -C /demo [ to extract the tar file ]
+
+gzip command : tar -cvf /etc.tar /etc
+			 gzip etc.tar.gz 
+			unzip etc.tar.gz
+Scheduling Task : Job scheduling is a feature that allows a user to submit a command or program for execution at a sepcifed time in the future.
+
+at - single time execution.
+crontab - periodic execution.
+anacron - periodic execution.
+
+
+*	*	*	*	*
+
+first * denotes min [0-59]
+second * denotes hours [0-23]
+third * denotes days of months [1-31]
+fourth * denotes number of months [1-12]
+fifth * denotes days of week [0-7]
+
+to create a crontab 	# crontab -e
+to delete a crontab 	# crontab -r  			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+	

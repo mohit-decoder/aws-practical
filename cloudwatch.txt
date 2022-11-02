@@ -1,0 +1,62 @@
+why we need cloud mointoring?
+1. to enhance performance [monitoring logs and by seeing the graphs]
+2. cost management: [we can set alaram when the servers are high and vice versa we can reduce or add resources into it to manage our budget and optimize the resources.]
+3. detecting errors and troubleshooting: [if a server is failed in operation by using cloud watch service we get notified for failure operation.]
+
+why do we need cloud based mointoring? 
+
+1. to mointor system performance
+2. to reduce unnecessary operating cost.
+3. detect the errors to prevent and overcome from downtime and busniess losses.
+
+what is amazon cloudwatch?
+amazon cloudwatch is the component of aws that provides real time monitoring of aws resources and customer application running on amazon infrastructure both basic and detailed mointoring.
+
+there are two types of monitoring offered by aws cloudwatch:
+1. basic monitoring [free of cost. polls every 5 min. very few metrics]
+2. detailed monitoring [its charged. polls every 1 min. wide range metrics]
+
+============================================================================================================================================================
+cloudwatch [PRACTICAL]
+
+CREATE AN INSTANCE: 
+	take ssh of instance
+	# yum install httpd
+	# systemctl start httpd
+	# systemctl enable httpd
+	# vim /var/www/html/index.html
+	# <h1>
+		hello world
+	  </h1>
+	# systemctl restart httpd
+hit the ip of instance over the internet
+	# cd /var/log/httpd
+	# cat access_log
+attach the role in the instance: create a role > aws-services > ec2 > CloudWatchAgentServerPolicy > mm-cloudwatch-role
+	
+now download the awslog package cd /
+	# yum install awslogs -y
+	# systemctl start awslogsd.service
+	# systemctl restart awslogsd.service
+	# cd /etc/awslogs
+	# vim awscli.conf
+	change the region = us-west-2[as per your instance region]
+	# vim awslogs.conf
+	# [/var/log/httpd/access_log]
+	  datetime_format = %b %d %H:%M:%S
+	  file = /var/log/httpd/access_log
+	  buffer_duration = 5000
+	  log_stream_name = httpd{instance_id}
+	  initial_position = start_of_file
+	  log_group_name = /var/log/httpd/access_log
+	  
+	  [/var/log/httpd/error_log]
+	  datetime_format = %b %d %H:%M:%S
+	  file = /var/log/httpd/error_log
+	  buffer_duration = 5000
+	  log_stream_name = httpd{instance_id}
+ 	  initial_position = start_of_file
+	  log_group_name = /var/log/httpd/error_log
+
+now go to cloudwatch in console and go to log group.
+you will see the logs.

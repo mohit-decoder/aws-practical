@@ -1,0 +1,30 @@
+CLOUD-FORMATION [CREATE TEMPLATE USING DESIGNER]
+
+STEP 1: Create role[IAM]: use case: cloudformation
+	     permission policies: Amazons3fullaccess.
+	     role name: mm-cloudformation-s3-role.
+
+STEP 2: Create stack: Create template in Designer
+	create template in designer 
+	Resource type: s3 > validate[tick] > create stack[cloudsymbol]
+	Stack Name:  cloudformation-stack
+	tags: name: stack
+	permissions: iam role > [select the iam role mm-cloudformation-s3-role.]
+	
+===============================================================================================================
+
+CLOUD-FORMATION [USE SAMPLE TEMPLATE]
+
+STEP 1: Prepare template : Use a sample template
+	 Sample templates: LAMP-STACK
+	 Stack name: lamp-stack
+	 DBname: mydatabase
+	 DBPassword: Redhat#123
+	 DBuser: admin
+	 instance type: t2.small
+	 keyname: privatekey
+	 ssh-location: 0.0.0.0/0
+
+STEP 2: See the instance is created and hit the public ip and your php default page will be displayed.
+==============================================================================================================
+	 

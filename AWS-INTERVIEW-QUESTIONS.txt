@@ -1,0 +1,68 @@
+1. difference betwwen EBS EFS s3?
+ANS. S3 provides you a web interface
+     EBS provides a file system interface
+     EFS provides a web and file system interface
+2. basic components required to create a vpc? 
+ans. SUBNET
+     INTERNET-GATEWAY ATTACT TO VPC
+     ROUTE-TABLE
+     ROUTE ENTRY OF INTERNET-GATEWAY, SUBNET ASSOC.
+3. s3 storage classes ?
+ANS. THERE ARE 7 STORAGE CLASSES:
+     S3 STANDARD
+     S3 STANDARD IA
+     S3 INTELLIGENT TIERING
+     S3 ONE ZONE IA
+     S3 GLACIER INSTANT
+     S3 GLACIER FLEXIBLE RETRIVAL
+     S3 GLACIER DEEP ARCHIVE
+
+4. what is OS?
+ANS: An operating system (OS) is the program that, after being initially loaded into the computer by a boot program, manages all of the other application programs in a computer
+
+5. what is linux ?
+ans: linux is an open-source operating system. 
+
+6. What is link count ?
+ans: A Link count shows how many directory entries link to the file. A file's link count is displayed in the second column of output from the ls -l 
+
+7. how will you create a softlink ?
+ans: ln -s
+
+8.difference betwwen hardlink and softlink ?
+ans: hardlink is replication of directory. if you delete the hardlink file created or orignial file and softlink is  
+what is inode no.?
+default permission umask for root & localuser?
+
+how much shell is prsent in ur machine how will you check ?
+when we login on which shell we present ?
+how will you or change shell ?
+why we use linux ?
+in aws Which are you aware about? or on which service u have handson?
+tell me about load balancer?
+ what is AS?
+what is roles?
+
+introduce your self?
+how many elastic IPs can you create ?
+how will you monitor the network traffic in a vpc ?
+what is ami?
+
+What is Elastic Computing ?
+Which is default instance type ?
+Which is most expensive options in instance ?
+Single object size is up to in Amazon S3 ?
+EBS is internet accessible ?
+
+what is NACL ?
+what is stateful and stateless ?
+Which is virtual network interface that you can attach to an
+instance in a VPC?
+Load Balancer and DNS service comes under which type of cloud
+service?
+
+autoscaling & mentions some of its benefits ?
+mention some important features of S3 buckets ?
+What are the different layers (Service Models) of cloud computing?
+What is the difference between Volume and Snapshot in the
+Amazon Web Services?

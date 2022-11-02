@@ -1,0 +1,20 @@
+create a instance:
+			name: demo instance
+			vpc: default
+			zone: no perference
+			public ip: enable	
+			security group: default					additional details: userdata: put ngnix script
+
+create hosted zone:
+		domain name: <freenom website>
+		type: public hosted	
+create a record:
+		record name: [leave-blank]
+		value: instance public ip
+
+freenome > services > mydomains > select your domain name
+click on manage domains > management tools [select name server] > paste the name server from aws records.
+
+hit the domain name [your template will shown]
+
+		

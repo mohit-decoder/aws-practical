@@ -1,0 +1,122 @@
+What is Lambda?
+
+- Lambda is a compute service where you can upload your code and create the Lambda function.
+- Lambda takes care of provisioning and managing the servers used to run the code.
+- While using Lambda, you don't have to worry about scaling, patching, operating systems, etc.
+
+Lambda can be used in the following ways:
+
+- It can be used as an event-driven compute service where AWS Lambda runs your code in response to events. 
+- These events could be changes to data in an Amazon S3 bucket or an Amazon DynamoDB table.
+- It can be used as a compute service to run your code in response to HTTP requests using Amazon API calls made using AWS SDKs.
+
+How does Lambda work?
+
+- User uploads an image to S3.
+- S3 triggers an event, and this event is a Lambda function.
+- Lambda function takes this image, and then encode the image. When an image is encoded, it gets stored in S3.
+- The Lambda function might trigger other Lambda event which is returning image location back to the user.
+- The Lambda might trigger another Lambda event that takes the image from the S3 bucket and stores it in another S3 bucket located anywhere in the world.
+
+CONCLUSION: 
+
+An important feature of Lambda is that it scales automatically. While using Lambda, you do not have to maintain Elastic Load Balancer. It either scales up or scales out based on the condition. Scaling up means increasing the resources in terms of RAM such as 8 GB to 12 GB. Scaling out means adding more and more instances. For example, Load Balancer. If load increases, you scale out rather than scaling up the instances. Lambda function scales out automatically. For example, if we have a two-line function, and millions of users hit the same function, millions of functions created to serve the millions of users.
+
+============================================================================================================================================================
+
+LAMBDA [INSTANCES - START AND STOP]
+
+STEP 1: CREATE AN INSTANCE WITH DEFAULT SETTINGS.
+
+STEP 2: IAM ROLE CREATE: -AWS SERVICE
+			LAMBDA
+			ROLE NAME: EC2-LAMBDA-ROLE
+			SELECT THE EC2-LAMBDA-ROLE [CREATE IN-LINE-POLICY]
+			CHOOSE A SERVICE: EC2
+			ACTIONS: [SEARCH START INSTANCE AND STOP INSTANCE]
+			RESOURCES:SPECIFIC RESOURCES
+			INSTANCES: ADD ARN > REGION [WRITE THE INSTANCE REGION- US-WEST-2] INSTANCE ID [YOUR INSTANCE ID]
+			
+STEP 3: LAMBDA > CREATE A FUNCTION: AUTHOR FROM A SCRATCH
+	   FUNCTION NAME: LAMBDA-1
+	   RUNTIME: PYTHON-3.6 
+	   CHANGE DEFAULT EXECUTION: EXECUTION ROLE- USE EXITING ROLE [SELECT THE EC2-LAMBDA]
+
+[TO STOP INSTANCE]	   
+import boto3
+region = 'us-west-2'
+instances = ['i-070877bd77d25bf7d']
+ec2 = boto3.client('ec2', region_name=region)
+def lambda_handler(event, context):
+    ec2.stop_instances(InstanceIds=instances)
+    print('stopped your instances: ' + str(instances))
+
+[TO START INSTANCE]
+import boto3
+region = 'us-west-2'
+instances = ['i-070877bd77d25bf7d']
+ec2 = boto3.client('ec2', region_name=region)
+def lambda_handler(event, context):
+    ec2.start_instances(InstanceIds=instances)
+
+STEP 4: DEPLOY
+
+STEP 5: [CLOUD-WATCH]CREATE A EVENT NAME: start/stop 
+		EVENT-SHARING SETTING: PRIVATE
+		TEMPLATE[OPTIONAL]: HELLO WORLD
+
+SOURCE: https://www.howtoforge.com/aws-lambda-function-to-start-and-stop-ec2-instance/
+==============================================================================================================
+
+LAMBDA [trigger s3-bucket]:
+
+STEP 1: CREATE A ROLE 
+		- AWS SERVICE
+		- COMMON USE CASES: LAMBDA
+	 SEARCH [DYNAMODBFULLACCESS] SELECT THE ROLE
+	 ROLE NAME: LAMBDA-ROLE-FOR-DYNAMODB
+
+STEP 2: LAMBDA > CREATE A FUNCTION:
+		- AUTHOR FROM SCRATCH
+	  BASIC INFORMATION > FUNCTION NAME: LAMDA01
+	  RUNTIIME PYTHON 3.6
+	  PERMISSIONS > EXECUTION ROLE: -USE AN EXISTING ROLE - LAMBDA-ROLEO-FOR-DYNAMODB
+
+
+	  CODE -"FUNCTION CODE"
+
+import boto3
+from uuid import uuid4
+def lambda_handler(event, context):
+    s3 = boto3.client("s3")
+    dynamodb = boto3.resource('dynamodb')
+    for record in event['Records']:
+        bucket_name = record['s3']['bucket']['name']
+        object_key = record['s3']['object']['key']
+        size = record['s3']['object'].get('size', -1)
+        event_name = record ['eventName']
+        event_time = record['eventTime']
+        dynamoTable = dynamodb.Table('newtable')
+        dynamoTable.put_item(
+            Item={'unique': str(uuid4()), 'Bucket': bucket_name, 'Object': object_key,'Size': size, 'Event': event_name, 'EventTime': event_time})
+
+STEP 3: CREATE A BUCKET:
+		BUCKET NAME: MM-LAMDA-BUCKET
+		REGION: SINGAPORE
+		UN-TICK THE CHECK-BOX OF BLOCK PUBLIC ACCESS
+
+STEP 4: LAMDA > ADD TRIGGER  
+		TRIGGER CONFIGURATION : S3
+		BUCKET: MM-LAMBDA-BUCKET
+		EVENT TYPE: ALL OBJECT CREATE EVENTS
+		ENABLE TRIGGER
+STEP 5: DYNAMODB 
+		CREATE A TABLE > TABLE NAME: NEWTABLE
+					PARTION KEY: UNIQUE [STRING]
+
+STEP 6: S3-BUCKET
+		UPLOAD [UPLOAD ANY FILES]
+[THIS SHOWS THE S3 BUCKET OBJECT WILL REFECT IN DYNAMODB DATABASE]
+
+SOURCE: TECHNINCAL-GUFTUGU [YOUTUBE]
+	

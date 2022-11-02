@@ -1,0 +1,17 @@
+DATABASES> DYNAMODB
+
+CREATE DYNAMODB TABLE:
+		    TABLE NAME: Studentdata
+		    partition key: RollNumber [strings]
+		    table settings:default settings 
+EXPLORE ITEMS: CREATE ITEMS:
+ATTRIBUTE NAME[SERIAL-NUMBER] VALUE[1]
+[CLICK ON ADD NEW ATTRIBUTE - STRINGS/NUMBER/BOOLEAN etc]
+
+create export to s3
+	source table: choose a table
+	destination s3 bucket: [browse your bucket if already created.]
+	s3 bucket owner: this aws account
+	
+
+	
